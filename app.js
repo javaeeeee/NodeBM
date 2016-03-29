@@ -10,6 +10,8 @@ var assert = require('assert');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var UserDAO = require('./daos/users').UserDAO;
+
 var app = express();
 
 // view engine setup
@@ -28,8 +30,10 @@ MongoClient.connect('mongodb://localhost/bookmarks', function(err, db) {
     assert.equal(err, null, 'Error connecting to the database.');
     console.log('Sucessfully connected to the database.');
 
+    var userDAO = new UserDAO(db);
+
     app.use(function(req, res, next) {
-        req.db = db;
+        req.userDAO = userDAO;
         next();
     });
 
