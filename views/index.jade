@@ -3,3 +3,14 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  form(method="POST")
+    p 
+      a(href="#") Not a member?
+    p Username: 
+      input(type="text", name="username")
+    p Password: 
+      input(type="password", name="password")
+    p 
+      input(type="submit", value="Log In")
+    p 
+     a(href="#") Forgot your password
