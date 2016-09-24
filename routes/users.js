@@ -1,15 +1,8 @@
 var express = require('express');
+var usersCtrl = require('../controllers/usersCtrl');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-    
-    this.userDAO = req.userDAO;
-    
-    this.userDAO.getUsers(function (users){
-        res.send(users);
-    });
-    
-});
+router.get('/', usersCtrl.users);
 
 module.exports = router;
