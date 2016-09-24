@@ -4,13 +4,17 @@ block content
   h1= title
   p Welcome to #{title}
   form(method="POST")
-    p 
-      a(href="#") Not a member?
-    p Username: 
-      input(type="text", name="username")
-    p Password: 
-      input(type="password", name="password")
-    p 
-      input(type="submit", value="Log In")
-    p 
-     a(href="#") Forgot your password
+    .form-group
+      label.sr-only(for='register')
+      a#register(href="#") Not a member?
+    .form-group
+      label Username
+        input#username.form-control(type="text", name="username")
+    .form-group
+      label Password
+        input#password.form-control(type="password", name="password")
+    .form-group
+      label.sr-only(for='ren_pass')
+      a#ren_pass(href="#") Forgot your password
+    input.btn.btn-default(type="submit", value="Log In")
+    

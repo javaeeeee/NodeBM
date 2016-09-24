@@ -25,14 +25,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// Added Bootstrap using npm
+// http://stackoverflow.com/questions/26773767/purpose-of-installing-bootstrap-through-npm#35580597
+app.use('/js', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/js')));
+app.use('/js', express.static(path.join(__dirname, '/node_modules/jquery/dist')));
+app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css')));
 
-MongoClient.connect('mongodb://localhost/bookmarks', function(err, db) {
+MongoClient.connect('mongodb://localhost/bookmarks', function (err, db) {
     assert.equal(err, null, 'Error connecting to the database.');
     console.log('Sucessfully connected to the database.');
 
     var userDAO = new UserDAO(db);
 
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
         req.userDAO = userDAO;
         next();
     });
@@ -40,7 +45,7 @@ MongoClient.connect('mongodb://localhost/bookmarks', function(err, db) {
     app.use('/', routes);
     app.use('/users', users);
     // catch 404 and forward to error handler
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
         var err = new Error('Not Found');
         err.status = 404;
         next(err);
@@ -51,7 +56,7 @@ MongoClient.connect('mongodb://localhost/bookmarks', function(err, db) {
     // development error handler
     // will print stacktrace
     if (app.get('env') === 'development') {
-        app.use(function(err, req, res, next) {
+        app.use(function (err, req, res, next) {
             res.status(err.status || 500);
             res.render('error', {
                 message: err.message,
@@ -62,7 +67,7 @@ MongoClient.connect('mongodb://localhost/bookmarks', function(err, db) {
 
     // production error handler
     // no stacktraces leaked to user
-    app.use(function(err, req, res, next) {
+    app.use(function (err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
