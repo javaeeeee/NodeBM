@@ -1,9 +1,10 @@
-module.exports.users = function (req, res, next) {
+function users(req, res, next) {
 
-    this.userDAO = req.userDAO;
+  this.userDAO = req.userDAO;
 
-    this.userDAO.getUsers(function (users) {
-        res.send(users);
-    });
+  this.userDAO.getUsers((users) => {
+    res.send(users);
+  });
+}
 
-};
+module.exports.users = users;

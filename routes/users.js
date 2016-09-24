@@ -1,6 +1,7 @@
-var express = require('express');
-var usersCtrl = require('../controllers/usersCtrl');
-var router = express.Router();
+const express = require('express');
+const usersCtrl = require('../controllers/usersCtrl');
+
+const router = express.Router();
 
 /* GET users listing. */
 router.get('/', usersCtrl.users);
